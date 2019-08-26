@@ -6,30 +6,28 @@ console.log("Sanity Check");
         el: "#main",
         data: {
             name: "Sassafrass", //These properties are reactive
-            seen: true,
-            planets: [],
-            myClassName: "highlight"
+            images: [],
+            myClassName: "color" + Math.floor(Math.random() * 2),
+            
         },
         mounted: function() {
-            console.log("My view has mounted");
-            console.log("Planets is ", this.planets);
             var me = this;
-            axios.get('/planets').then(function(response) {
-                console.log("this.planets in then", this.planets);
-                console.log("me.planets in then", me.planets);
-
-                console.log("This is my response!", response);
-                console.log("This is my response!", response.data);
-                me.planets = response.data;
-            });
+            axios.get('/begin')
+                .then(function(results) {
+                    me.images = results.data;
+                    console.log(me.images);
+                });
         },
         methods: {
-            myFunction: function(planetName) {
-                console.log("myFunction is running!", planetName);
-            },
-            myNextMethod: function() {
-                console.log("another method");
-            }
+            randomColor: (function () {
+                var r = Math.floor(Math.random() * 256);
+                var g = Math.floor(Math.random() * 256);
+                var b = Math.floor(Math.random() * 256);
+                var randomColor = "rgb(" + r + "," + g + "," + b + ")";
+                return randomColor;
+            })()
+
+
         }
     });
 

@@ -1,25 +1,16 @@
 const express = require("express");
 const app = express();
+const db = require("./utils/db");
 
-app.use(express.static("public"));
+app.use(express.static("./public"));
 
-app.get("/planets", (req, res) => {
-    let planets = [
-        {
-            name: "Pluto",
-            colour: "grey/yellow"
-        },
-        {
-            name: "Venus",
-            colour: "orange"
-        },
-        {
-            name: "Mars",
-            colour: "red"
-        }
-    ];
-    console.log("I hit the planets route");
-    res.json(planets);
+app.get("/begin", (req, res) => {
+    db.getImages().then(data => {
+        res.json(data);
+    }).catch(err => {
+        console.log("err", err);
+    });
 });
+
 
 app.listen(8080, () => console.log("Image board server is running..."));
