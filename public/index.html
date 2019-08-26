@@ -1,10 +1,31 @@
 <!doctype html>
+
 <html>
 <head>
-    <title></title>
+    <title>Image Board!</title>
+        <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+    <h1>Image Board!</h1>
+    <div id="main">
+        <!-- Both click methods below do the same thing -->
+        <h2 @click="myFunction">The best cohort is: {{ name }}</h2>
+        <h2 v-on:click="myFunction">Maths! 17.34 * 8.382 = {{ 17.34 * 8.382 }}</h2>
+        <!-- Both class methods below do the same thing -->
+        <h2 v-bind:class = "myClassName">Capitalise! {{"potatoes".toUpperCase()}}</h2>
+        <h2 :class="myClassName">Capitalise! {{name.toUpperCase()}}</h2>
+        <h3 v-if="seen">Can you see me?</h3>
+        <ul>
+            <li v-for="planet in planets" @click="myFunction(planet.name)">
+                {{planet.name}}, {{planet.colour}}
+            </li>
+        </ul>
+
+    </div>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script type="text/javascript" src="/js/script.js">
+
+    </script>
 </body>
 </html>

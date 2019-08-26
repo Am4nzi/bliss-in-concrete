@@ -1,0 +1,10 @@
+body {
+    background-color: salmon;
+}
+
+.highlight {
+    font-weight: bold;
+    color: tomato;
+    background-color: pink;
+    text-decoration: underline;
+}
