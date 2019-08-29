@@ -11,6 +11,7 @@
             description: "",
             username: "",
             url: "",
+            //location.hash.slice(1);
             file: null
         },
 
