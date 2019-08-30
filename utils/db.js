@@ -27,48 +27,22 @@ exports.getImagesNew = () => {
         });
 };
 
-exports.getMoreImages = (startId, offset) => {
+exports.getMoreImages = lastId => {
     return db
         .query(
-            `SELECT * FROM images
-        WHERE id < $1
-        ORDER BY id DESC
-        LIMIT 5
-        OFFSET $2`,
-            [startId, offset]
+            `SELECT *, (
+                SELECT id
+                FROM images
+                ORDER BY id ASC
+                LIMIT 1
+            )AS "lowestId" FROM images
+            WHERE id < $1
+            ORDER BY id DESC
+            LIMIT 24`,
+            [lastId]
         )
         .then(({ rows }) => rows);
 };
-
-// exports.getImages = () => {
-//     return db.query(
-//         `SELECT * FROM images
-//         ORDER BY created_at DESC`)
-//         .then(({ rows }) => {
-//             return rows;
-//         });
-// };
-
-//GET 24 AT A TIME
-//WHAT IS THE LOWEST ID OF THE DATABASE -> THIS WILL HELP TO KNOW WHEN TO HIDE STOP BUTTON. IF FIRST IMAGE HAS ID OF 1, WHEN YOU HAVE AN IMAGE WITH THE ID OF 1, STOP SHOWING...
-//DON'T HARD CARD IMAGE IDs b/c PEOPLE MIGHT WANT TO DELETE IMAGES. YOU SHOULD DO A SEPERATE QUERY INSTEAD*
-// exports.getImages24 = () => {
-//     return db.query(
-//         `SELECT id,
-//          url, title, description FROM images
-//         ORDER BY created_at DESC
-//         WHERE id < $1
-//         LIMIT 24`)
-//         .then(({ rows }) => {
-//             return rows;
-//         });
-// };
-
-// *
-// SELECT id AS "lowestId"
-// FROM IMAGES
-// ORDER by id ASC
-// LIMIT 1
 
 exports.addImages = (title, username, description, url) => {
     return db.query(

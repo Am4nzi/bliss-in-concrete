@@ -12,7 +12,7 @@
             url: "",
             //location.hash.slice(1);
             file: null,
-
+            hideMoreButton: ""
         },
 
         mounted: function() {
@@ -21,6 +21,12 @@
                 .get("/showImages")
                 .then(function(results) {
                     me.images = results.data;
+                    if (me.images.length < 2) {
+                        me.hideMoreButton = "hideButton";
+                    }
+                    if (me.images.length > 1) {
+                        me.hideMoreButton = "";
+                    }
                 })
                 .catch(err => {
                     console.log("ERROR in mounted in script.js", err);
@@ -62,10 +68,18 @@
             showMore: function(e) {
                 e.preventDefault();
                 var me = this;
+                var imagesLength = me.images.slice(-1)[0].id;
                 axios
-                    .get("/showImagesNew")
+                    .get("/showMoreImages/" + imagesLength)
                     .then(function(results) {
-                        me.images = results.data;
+                        console.log(me.images);
+                        console.log(imagesLength);
+                        if (me.images.length > 4) {
+                            me.images = results.data;
+                        }
+                        if (me.images.length % 24 != 0) {
+                            me.hideMoreButton = "hideButton";
+                        }
                     })
                     .catch(err => {
                         console.log("ERROR in mounted in script.js", err);
@@ -108,22 +122,22 @@
                         err
                     );
                 });
-            axios
-                .get("/showComment/" + this.imageId)
-                .then(function(results) {
-                    me.comments = results.data.rows;
-                    console.log(
-                        "Logging results.data.rows in /showComment",
-                        results.data.rows
-                    );
-                    // console.log("me.images in component", me.images);
-                })
-                .catch(err => {
-                    console.log(
-                        "ERROR in /showComment in mounted in script.js",
-                        err
-                    );
-                });
+            // axios
+            //     .get("/showImages" + this.imageId)
+            //     .then(function(results) {
+            //         me.comments = results.data.rows;
+            //         // console.log(
+            //         //     "Logging results.data.rows in /showComment",
+            //         //     results.data.rows
+            //         // );
+            //         // console.log("me.images in component", me.images);
+            //     })
+            //     .catch(err => {
+            //         console.log(
+            //             "ERROR in /showComment in mounted in script.js",
+            //             err
+            //         );
+            //     });
         },
 
         //methods only run when the user does something (click, mouseover etc.)
@@ -134,7 +148,7 @@
             addComment: function(e) {
                 e.preventDefault();
                 var me = this;
-                console.log("Logging this in addComment", this);
+                // console.log("Logging this in addComment", this);
 
                 axios
                     .post("/comment/" + this.imageId, this.form)
@@ -144,10 +158,10 @@
                         // console.log("Logging me in addComment", me);
                         // console.log("Logging me.comment in addComment", me.comment);
                         // console.log("Logging me.form.comment in addComment", me.form.comment);
-                        console.log(
-                            "Logging me.comments in addComment",
-                            me.comments
-                        );
+                        // console.log(
+                        //     "Logging me.comments in addComment",
+                        //     me.comments
+                        // );
                         me.comments.unshift(results.data);
                     })
                     .catch(function(err) {

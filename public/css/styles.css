@@ -195,6 +195,10 @@ input {
     height: 100%;
 }
 
+.hideButton {
+    display: none;
+}
+
 .comments-output {
     /* height: 120px; */
     color: white;

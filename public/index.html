@@ -36,7 +36,8 @@
                     </div>
                 </div>
             </section>
-            <button @click='showMore'>THIS IS A BUTTON</button>
+            <!-- <button @click='showMore'>THIS IS A BUTTON</button> -->
+                <button @click='showMore' v-bind:class = "hideMoreButton">THIS IS A BUTTON</button>
         </div>
 
         <!-- This first planet (left hand side) is referring to the prop planet in the component, the second planet (right hand side) refers to the planet defined in data the vue instance -->
@@ -84,7 +85,7 @@
                             <input v-model="form.comment" name="comment" placeholder="comment" type="text" class="comment-input" />
                             <input v-model="form.username" name="username" placeholder="username" type="text" class="username" />
                             <div>
-                                <button @click="addComment">submit</button>
+                                <button v-if='showButton' @click="addComment">submit</button>
                             </div>
                             <div class="comments-output" v-for="comment in comments">
                                 <p>{{comment.comment}}</p>
