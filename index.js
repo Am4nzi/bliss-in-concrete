@@ -25,12 +25,35 @@ const uploader = multer({
     }
 });
 
+app.use(express.json());
+
+//Boilerplate code added from notes
 app.use(express.static("./public"));
 
-app.get("/begin", (req, res) => {
+app.get("/showImages", (req, res) => {
     db.getImages()
         .then(data => {
-            console.log("data in begin", data);
+            res.json(data);
+        })
+        .catch(err => {
+            console.log("err", err);
+        });
+});
+
+//DELETE THIS WHEN REDUNDENT
+app.get("/showImagesNew", (req, res) => {
+    db.getImagesNew()
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => {
+            console.log("err", err);
+        });
+});
+
+app.get("/showMoreImages", (req, res) => {
+    db.getMoreImages()
+        .then(data => {
             res.json(data);
         })
         .catch(err => {
@@ -41,7 +64,7 @@ app.get("/begin", (req, res) => {
 app.get("/showModalImage/:id", (req, res) => {
     db.getSingleImage(req.params.id)
         .then(data => {
-            console.log(data);
+            // console.log(data);
             res.json(data);
         })
         .catch(err => {
@@ -72,6 +95,31 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             success: false
         });
     }
+});
+
+app.post("/comment/:id", (req, res) => {
+    // console.log("LOGGING /COMMENT IN POST");
+    // console.log("Logging req.body /COMMENT IN POST: ", req.body);
+    // console.log("Logging req.params /COMMENT IN POST: ", req.params);
+    db.addComment(req.body.comment, req.body.username, req.params.id)
+        .then(data => {
+            res.json(data.rows[0]);
+            // console.log("LOGGING RES IN APP.POST /COMMENTS: ", res);
+        })
+        .catch(err => {
+            console.log("ERROR IN APP.POST /COMMENTS: ", err);
+        });
+});
+
+app.get("/showComment/:id", (req, res) => {
+    db.getComment(req.params.id)
+        .then(data => {
+            // console.log(data);
+            res.json(data);
+        })
+        .catch(err => {
+            console.log("err", err);
+        });
 });
 
 app.listen(8080, () => console.log("Image board server is running..."));

@@ -238,8 +238,6 @@ br {
 @media all and (max-height: 800px) {
     #modal-overlay {
         width: 90%;
-
-
     }
 
     .modal-overlay-image-container {
