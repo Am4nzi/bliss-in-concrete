@@ -7,7 +7,7 @@ exports.getImages = () => {
         .query(
             `SELECT * FROM images
         ORDER BY created_at DESC
-        LIMIT 5`
+        LIMIT 24`
         )
         .then(({ rows }) => {
             return rows;
@@ -20,7 +20,7 @@ exports.getImagesNew = () => {
         .query(
             `SELECT * FROM images
         ORDER BY created_at DESC
-        LIMIT 10`
+        LIMIT 24`
         )
         .then(({ rows }) => {
             return rows;
@@ -71,9 +71,11 @@ exports.addComment = (comment, username, id) => {
 };
 
 exports.getComment = imageId => {
+    console.log('really tryin to get the comments ....', imageId);
     return db.query(
         `SELECT comment, username FROM comments
-        WHERE id = $1`,
+        WHERE image_id = $1
+        ORDER BY created_at DESC`,
         [imageId]
     );
 };

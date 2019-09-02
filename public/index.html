@@ -36,15 +36,16 @@
                     </div>
                 </div>
             </section>
-            <!-- <button @click='showMore'>THIS IS A BUTTON</button> -->
-                <button @click='showMore' v-bind:class = "hideMoreButton">THIS IS A BUTTON</button>
-        </div>
 
-        <!-- This first planet (left hand side) is referring to the prop planet in the component, the second planet (right hand side) refers to the planet defined in data the vue instance -->
+            </div>
         <!-- <image-modal v-if='showModal' :planet='planet' @close='closeModalOnParent'></image-modal> -->
         <image-modal v-if='showModal' :image-id='imageId' @close='closeModalOnParent'>
         </image-modal>
         <!-- If your prop is written in camelCase (so 'planetName') then the left side neds to be written in kebabcase: i.e. planet-name -->
+        <div class="more-button-container">
+        <!-- <button @click='showMore'>THIS IS A BUTTON</button> -->
+            <button @click='showMore' v-bind:class = "hideMoreButton" class="more-button">SHOW MORE</button>
+    </div>
 
 
         <!-- this closes the #main div -->
@@ -79,20 +80,21 @@
                     </div>
                     <div class="modal-comments-container">
 
-                        <h2>ADD A COMMENT</h2>
+                        <h2 class = "add-comment-h2">ADD A COMMENT</h2>
 
                         <form>
-                            <input v-model="form.comment" name="comment" placeholder="comment" type="text" class="comment-input" />
-                            <input v-model="form.username" name="username" placeholder="username" type="text" class="username" />
+                            <textarea v-model="form.comment" name="comment" placeholder="comment" type="text" class="comment-input"></textarea>
+                            <textarea v-model="form.username" name="username" placeholder="username" type="text" class="comment-username"> </textarea>
                             <div>
-                                <button v-if='showButton' @click="addComment">submit</button>
+                                <button @click="addComment" class="submit-comment-button">SUBMIT COMMENT</button>
                             </div>
+                            <div class=comments-output-container>
+
+
                             <div class="comments-output" v-for="comment in comments">
-                                <p>{{comment.comment}}</p>
-                                <p><i>{{comment.username}} at {{comment.created_at}}</i></p>
+                                <p>{{comment.username}} <i>wrote:</i><br /> {{comment.comment}} </p>
                             </div>
-
-
+                                </div>
 
                             </form>
 

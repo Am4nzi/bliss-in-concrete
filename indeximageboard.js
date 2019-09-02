@@ -31,6 +31,7 @@ app.use(express.json());
 app.use(express.static("./public"));
 
 app.get("/showImages", (req, res) => {
+    // console.log("THIS IS MY LOG", req);
     db.getImages()
         .then(data => {
             res.json(data);
@@ -53,7 +54,7 @@ app.get("/showImagesNew", (req, res) => {
 });
 
 app.get("/showMoreImages/:id", (req, res) => {
-    // console.log("Logging req.params.id in /showMoreImages", req.params.id);
+    console.log("Logging req.params.id in /showMoreImages", req.params.id);
     db.getMoreImages(req.params.id)
         .then(data => {
             res.json(data);
@@ -80,7 +81,7 @@ app.get("/showModalImage/:id", (req, res) => {
 
     db.getSingleImage(req.params.id)
         .then(data => {
-            // console.log(data);
+            console.log(data);
             res.json(data);
             // console.log("THIS IS MY LOG", req.params.id[0]);
         })
@@ -131,15 +132,12 @@ app.post("/comment/:id", (req, res) => {
 app.get("/showComment/:id", (req, res) => {
     db.getComment(req.params.id)
         .then(data => {
-            console.log('need this to work!!!!',data);
-            console.log(data.rows);
-            res.json(data.rows);
-
+            // console.log(data);
+            res.json(data);
         })
         .catch(err => {
             console.log("err", err);
         });
 });
-
 
 app.listen(8080, () => console.log("Image board server is running..."));

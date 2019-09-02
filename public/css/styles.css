@@ -15,9 +15,9 @@ h1 {
     font-family: alfarn, sans-serif;
     /* font-weight: 900; */
     font-size: 3.78rem;
-    color: #262626;
+    color: black;
     display: inline-block;
-    margin: 36px 0 20px 52px;
+    margin: 36px 0 20px 87px;
     line-height: 2.73rem;
 
 }
@@ -30,7 +30,7 @@ h2 {
 }
 
 input {
-    background-color: #262626;
+    background-color: black;
     border: none;
     margin-bottom: 4px;
 }
@@ -42,13 +42,15 @@ input {
     display: flex;
     flex-direction: column;
     color: white;
+    margin-left: 90px;
+    margin-bottom: 30px;
 }
 
 #gallery-form > input {
     color: white;
     width: 600px;
     height: 40px;
-    padding-left: 50px;
+    padding-left: 20px;
     font-family: aktiv-grotesk-extended, sans-serif;
     font-weight: 300;
     font-style: normal;
@@ -100,15 +102,14 @@ input {
     font-style: normal;
     color: #1a1a1a;
     font-size: 1.1rem;
-    width: 90%;
+    width: 83%;
     /* text-align: center; */
-    line-height: 0.9;
+    line-height: 1;
 }
 
 #model-overlay-wrapper {
     display: flex;
     justify-content: center;
-
 }
 
 #modal-overlay {
@@ -120,13 +121,14 @@ input {
     margin-top: 2%;
     display: flex;
     z-index: 5;
-
 }
 
 .modal-overlay-image-container {
     width: 100%;
-    max-width: 1400px;
+    /* max-width: 780px; */
+    min-width: 400px;
     height: 100%;
+
     border-radius: 2px;
     /* box-shadow: 0 5px 9px 0 rgba(0,0,0,.2); */
     /* align-items: center; */
@@ -136,7 +138,6 @@ input {
 
 .modal-overlay-image-container>img {
     object-fit: cover;
-    height: 335px;
 }
 
 .close-modal {
@@ -150,12 +151,11 @@ input {
 }
 
 .modal-title-container {
-    width: 100%;
+    width: 50%;
     font-family: aktiv-grotesk-extended, sans-serif;
     height: 90px;
-    background-color: rgba(0,0,0,.7);
     position: absolute;
-    bottom: 0;
+    top: 15px;
     display: flex;
     align-items: start;
     justify-content: center;
@@ -165,14 +165,15 @@ input {
 .modal-title-container > p {
     line-height: 18px;
     margin: 0 0 0 50px;
-    width: 45%;
-    font-size: 0.84rem;
+    background-color: black;
+    font-size: 0.9rem;
+    padding: 10px;
 }
 
 .modal-comments-container {
     font-family: aktiv-grotesk-extended, sans-serif;
     margin-left: 20px;
-    width: 55%;
+    width: 45%;
 }
 
 .modal-comments-container > form {
@@ -182,31 +183,78 @@ input {
 
 }
 
-.modal-comments-container > form > input {
+/* .modal-comments-container > form > input {
     color: white;
     width: 60%;
     font-family: aktiv-grotesk-extended, sans-serif;
     font-style: normal;
     font-size: 1rem;
 
-}
+} */
 
 .comment-input {
-    height: 100%;
+    height: 100px;
+    max-height: 80px;
+    color: black;
+    overflow: auto;
+    width: 70%;
+    max-width: 70%;
+    font-family: aktiv-grotesk-extended, sans-serif;
+    font-style: normal;
+    font-size: 1rem;
+    rows: 4;
+    margin-bottom: 10px;
 }
+
+/* .username {
+    max-height: 30px;
+    height: 40px;
+    color: black;
+    font-family: aktiv-grotesk-extended, sans-serif;
+    font-style: normal;
+    font-size: 1rem;
+    margin-bottom: 10px;
+} */
+
+.comment-username {
+    max-height: 30px;
+    height: 30px;
+    color: black;
+    font-family: aktiv-grotesk-extended, sans-serif;
+    font-style: normal;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    width: 70%;
+    max-width: 70%;
+}
+
 
 .hideButton {
     display: none;
 }
 
+.comments-output-container {
+    width: 79%;
+    height: 140px;
+    margin-top: 53px;
+    overflow: auto;
+}
+
 .comments-output {
     /* height: 120px; */
     color: white;
-    width: 60%;
+    /* width: 93%; */
     font-style: normal;
-    font-size: 1rem;
-    background-color: #262626;
-    padding-left: 50px;
+    font-size: 0.9rem;
+    padding-left: 10px;
+
+}
+
+.comments-output p {
+    overflow-wrap: break-word;
+     word-wrap: break-word;
+     hyphens: auto;
+
 }
 
 br {
@@ -224,6 +272,67 @@ br {
     margin: -10%;
 }
 
+.more-button-container {
+    display: flex;
+    justify-content: center;
+
+    bottom: 0;
+    width: 100%;
+}
+
+.more-button {
+    width: 100%;
+    font-family: aktiv-grotesk-extended, sans-serif;
+    border: none;
+    color: #eee;
+    background-color: black;
+    position: absolute;
+     transition: all .35s ease-Out;
+     height: 40px;
+     font-size: 1.3rem;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  left: -200px;
+  background: #BFC0C0;
+  position: absolute;
+  transition: all .35s ease-Out;
+  bottom: 0;
+}
+
+.more-button:hover .slide {
+  left: 0;
+}
+
+.more-button:hover {
+  background-color: white;
+  color: black;
+}
+
+.submit-comment-button {
+    width: 25%;
+    border: 1px solid white;
+    font-family: aktiv-grotesk-extended, sans-serif;
+    color: #eee;
+    background-color: black;
+    position: absolute;
+     transition: all .35s ease-Out;
+     height: 40px;
+     font-size: 1rem;
+    margin-bottom: 50px;
+
+}
+
+.submit-comment-button:hover .slide {
+  left: 0;
+}
+
+.submit-comment-button:hover {
+  background-color: white;
+  color: black;
+}
 @media all and (max-width: 865px) {
     #grid-container {
         grid-template-columns: repeat(auto-fit, minmax(405px, 1fr));
@@ -239,9 +348,10 @@ br {
 
 }
 
-@media all and (max-height: 800px) {
+@media all and (max-height: 900px) {
     #modal-overlay {
         width: 90%;
+
     }
 
     .modal-overlay-image-container {
@@ -270,7 +380,7 @@ br {
     }
 }
 
-@media all and (max-width: 750px) {
+@media all and (max-width: 1200px) {
 
     #grid-container {
         grid-template-columns: repeat(1fr);
@@ -286,8 +396,19 @@ br {
         text-align: center; */
         margin: 0 0 0 0;
         flex-direction: column;
+        height: 100%;
+        overflow-y: auto;
 
     }
+
+    #model-overlay-wrapper {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        overflow-y: auto;
+
+    }
+
 
     .modal-overlay-image-container {
         width: 100%;
@@ -298,17 +419,15 @@ br {
 
     .modal-overlay-image-container>img {
         object-fit: cover;
-        width: 100%;
-        /* height: 375px; */
+        width: 60%;
+        height: 375px;
     }
 
     .modal-title-container {
-        width: 100%;
+        width: 90%;
         font-family: aktiv-grotesk-extended, sans-serif;
         height: 75px;
-        background-color: rgba(0,0,0,.7);
-        position: relative;
-        top: -0;
+        top: 0;
         display: flex;
         align-items: start;
         justify-content: center;
@@ -316,10 +435,119 @@ br {
     }
 
     .modal-title-container > p {
+        padding: 10px;
         line-height: 18px;
-        margin: 0 0 0 50px;
-        width: 85%;
-        font-size: 0.84rem;
+        margin: 0 0 0 34px;
+        font-size: 0.75rem;
+        background-color: black;
     }
 
+    .modal-comments-container {
+        font-family: aktiv-grotesk-extended, sans-serif;
+        margin-left: 45px;
+        width: 100%;
+    }
+
+    .modal-comments-container > form {
+        display: flex;
+        color: white;
+        width: 100%
+
+    }
+
+    .comments-output-container {
+        width: 79%;
+        height: 140px;
+        margin-top: 53px;
+        margin-bottom: 20px;
+        overflow: auto;
+    }
+
+    .add-comment-h2 {
+        margin-bottom: 7px;
+
+    }
+
+
+
+    #modal-full-transparent {
+        width: 70x;
+        height: 70px;
+        background-color: black;
+        opacity: 0.8;
+        position: fixed;
+        z-index: -10;
+        margin: -10%;
+    }
+
+    .submit-comment-button {
+        width: 210px;
+        border: 1px solid white;
+        font-family: aktiv-grotesk-extended, sans-serif;
+        color: #eee;
+        background-color: black;
+        position: absolute;
+         transition: all .35s ease-Out;
+         height: 40px;
+         font-size: 1rem;
+        margin-bottom: 50px;
+
+    }
+
+    .comment-input {
+        width: 70%;
+        max-width: 70%;
+
+    }
+
+    .comment-username {
+        width: 60%;
+        max-width: 60%
+
+    }
+
+}
+
+@media all and (max-width: 700px) {
+
+
+
+    #gallery-form {
+        margin-left: 0;
+    }
+
+    #gallery-form > input {
+        width: 100%;
+
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        display: inline-block;
+        width: 15px;
+        cursor: pointer;
+        color: white;
+        background-color: black;
+        padding: 3px;
+    }
+
+    h1 {
+        margin-left: 24px;
+
+
+    }
+
+
+    .modal-title-container {
+        width: 85%;
+        font-family: aktiv-grotesk-extended, sans-serif;
+        height: 75px;
+        top: 0;
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        flex-direction: column;
+    }
 }

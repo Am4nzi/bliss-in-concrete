@@ -21,10 +21,10 @@
                 .get("/showImages")
                 .then(function(results) {
                     me.images = results.data;
-                    if (me.images.length < 2) {
+                    if (me.images.length < 23) {
                         me.hideMoreButton = "hideButton";
                     }
-                    if (me.images.length > 1) {
+                    if (me.images.length > 23) {
                         me.hideMoreButton = "";
                     }
                 })
@@ -105,16 +105,12 @@
             };
         },
         mounted: function() {
-            // console.log(
-            //     "logging this.imageId in mounted function",
-            //     this.imageId
-            // );
             var me = this;
+
             axios
                 .get("/showModalImage/" + this.imageId)
                 .then(function(results) {
                     me.images = results.data.rows[0];
-                    // console.log("me.images in component", me.images);
                 })
                 .catch(err => {
                     console.log(
@@ -122,22 +118,22 @@
                         err
                     );
                 });
-            // axios
-            //     .get("/showImages" + this.imageId)
-            //     .then(function(results) {
-            //         me.comments = results.data.rows;
-            //         // console.log(
-            //         //     "Logging results.data.rows in /showComment",
-            //         //     results.data.rows
-            //         // );
-            //         // console.log("me.images in component", me.images);
-            //     })
-            //     .catch(err => {
-            //         console.log(
-            //             "ERROR in /showComment in mounted in script.js",
-            //             err
-            //         );
-            //     });
+            axios
+                .get("/showComment/" + me.imageId)
+                .then(function(results) {
+                    // console.log("me.images in then", me.images);
+                    console.log(
+                        "Logging results.data.rows /showComment/ in GET: ",
+                        results
+                    );
+                    me.comments = results.data;
+                })
+                .catch(function(error) {
+                    console.log("ERROR in /showComment: ", error);
+                    if (error) {
+                        this.showModal = false;
+                    }
+                });
         },
 
         //methods only run when the user does something (click, mouseover etc.)
@@ -151,17 +147,9 @@
                 // console.log("Logging this in addComment", this);
 
                 axios
-                    .post("/comment/" + this.imageId, this.form)
+                    .post("/comment/" + me.imageId, this.form)
                     .then(function(results) {
-                        // console.log("results in addComment", results);
-                        // console.log("Logging results in addComment", results);
-                        // console.log("Logging me in addComment", me);
-                        // console.log("Logging me.comment in addComment", me.comment);
-                        // console.log("Logging me.form.comment in addComment", me.form.comment);
-                        // console.log(
-                        //     "Logging me.comments in addComment",
-                        //     me.comments
-                        // );
+                        console.log(me.imageId);
                         me.comments.unshift(results.data);
                     })
                     .catch(function(err) {
