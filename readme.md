@@ -10,11 +10,11 @@ It was developed using Vue in in one week during my time at [SPICED Academy](htt
 
 ![upload-function](https://user-images.githubusercontent.com/45455994/66715349-97ef6e00-edc2-11e9-8b28-1a9d58c27d73.gif)
 
--   Uploading images.
+Uploading images.
 
 ![showmore-function](https://user-images.githubusercontent.com/45455994/66715353-a2116c80-edc2-11e9-9418-03d52d71dfcd.gif)
 
--   Activating the 'show more' button to view more images.
+Activating the 'show more' button to view more images.
 
 ![comment-function](https://user-images.githubusercontent.com/45455994/66715358-ab023e00-edc2-11e9-9a37-f5803bb36488.gif)
 
