@@ -24,6 +24,12 @@ Adding comments.
 
 Demonstrating mobile responsiveness.
 
+## Demo
+
+**Note: The image upload functionality has been disabled to prevent unsolicited images being uploaded**
+
+https://bliss-in-concrete.herokuapp.com/
+
 ## Tech
 
 Vue.js, JavaScript, Node.js, Express, PostgreSQL, AWS / S3, Multer, HTML, CSS
