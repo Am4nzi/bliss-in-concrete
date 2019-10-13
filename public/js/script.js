@@ -1,6 +1,4 @@
-
 (function() {
-
   new Vue({
     el: "#main",
     data: {
@@ -16,7 +14,6 @@
       file: null,
       hideMoreButton: ""
     },
-    
 
     mounted: function() {
       var me = this;
@@ -49,15 +46,17 @@
         formData.append("username", this.username);
         formData.append("file", this.file);
         var me = this;
-        axios
-          .post("/upload", formData)
-          .then(function(res) {
-            var imageUrl = res.data;
-            me.images.unshift(imageUrl);
-          })
-          .catch(function(err) {
-            console.log("Error in post /upload in script.js", err);
-          });
+        alert("Image upload disabled for security purposes");
+        //TO UNABLE IMAGE UPLOAD, UNCOMMENT BELOW CODE
+        // axios
+        //   .post("/upload", formData)
+        //   .then(function(res) {
+        //     var imageUrl = res.data;
+        //     me.images.unshift(imageUrl);
+        //   })
+        //   .catch(function(err) {
+        //     console.log("Error in post /upload in script.js", err);
+        //   });
       },
       handleChange: function(e) {
         this.file = e.target.files[0];
@@ -67,40 +66,35 @@
       },
       showMore: function(e) {
         e.preventDefault();
-        
+
         var me = this;
         var imagesLength = me.images.slice(-1)[0].id;
         axios
           .get("/showMoreImages/" + imagesLength)
           .then(function(results) {
-           
-          if (me.images.length > 4) {
-             
-              me.moreImages = results.data
-              Array.prototype.push.apply(me.images, me.moreImages );  
-          
+            if (me.images.length > 4) {
+              me.moreImages = results.data;
+              Array.prototype.push.apply(me.images, me.moreImages);
             }
             if (me.images.length % 24 != 0) {
               me.hideMoreButton = "hideButton";
-  
             }
           })
           .catch(err => {
             console.log("Error in mounted in script.js", err);
           });
-      },
-      
+      }
     }
   });
 
-
-  axios.get('api/getdata')
-.then(function (response) {
-    this.test = response.data;
-}.bind(this))
-.catch(function (error) {
-
-});
+  axios
+    .get("api/getdata")
+    .then(
+      function(response) {
+        this.test = response.data;
+      }.bind(this)
+    )
+    .catch(function(error) {});
 
   Vue.component("image-modal", {
     template: "#image-modal-template",
