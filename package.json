@@ -19,7 +19,11 @@
     "uid-safe": "^2.1.4",
     "vue-input-autowidth": "^1.0.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "1.18.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/spicedacademy/sassafras-imageboard.git"
