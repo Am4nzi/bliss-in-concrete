@@ -1,10 +1,107 @@
 <!doctype html>
 <html>
+
 <head>
-    <title></title>
+    <title>Bliss in Concrete</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/16516e60ab.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/gov0uom.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
+
+    <div id="main">
+        <div id="overlay"></div>
+
+        <h1>BLISS IN CONCRETE</h1>
+
+        <form id="gallery-form">
+            <h3>Upload a photo</h3>
+            <input v-model="title" name="title" placeholder="title" type="text" class="title" />
+            <input v-model="description" name="description" placeholder="description" type="text" class="description" />
+            <input v-model="username" name="username" placeholder="username" type="text" class="username" />
+            <div class="upload-button-container">
+
+
+                <input type="file" name="file" id="file" class="inputfile" accept="image/*" @change='handleChange'>
+                <label  for="file" class="upload-button" id="file" class="inputfile"><span>
+
+                        <i class="fas fa-file-upload upload-button-icon "></i></span>Choose a file</label>
+                <button @click="handleClick" class="submit-button">Submit</button>
+
+
+            </div>
+      
+        </form>
+
+
+        <div id="wrapper">
+            <section id="grid-container">
+
+                <div class="image-container" v-for="image in images">
+                    <img :src="image.url" :alt="image.title" @click='showModalMethod(image.id)'>
+                    <div class="title-container">
+                        <p>{{image.title}}</p>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+        <image-modal v-if='showModal' :image-id='imageId' @close='closeModalOnParent'>
+        </image-modal>
+        <div class="more-button-container">
+            <button @click='showMore' v-bind:class="hideMoreButton" class="more-button">SHOW MORE</button>
+        </div>
+
+    </div>
+    
+   <script id='image-modal-template' type='text/x-template'>
+        <div>
+            <div id="model-overlay-wrapper">
+                <div id="modal-overlay">
+                    <div id="modal-full-transparent">
+
+                    </div>
+                    <div>
+                        <img @click='closeModal' src="assets/clear.svg" class="close-modal-icon">
+
+                        <img class="modal-overlay-image-container" :src="images.url" :alt="images.title"
+                            @click='showModalMethod(image.id)'>
+                        <div class="modal-title-container">
+                            <p class="p-title">{{images.title}}<br>{{images.description}}</p>
+                        </div>
+
+                    </div>
+                    <div class="modal-comments-container">
+                        <p class="p-title-media">{{images.title}}<br>{{images.description}}</p>
+                        <h2 class="add-comment-h2">ADD COMMENT</h2>
+
+                        <form>
+                            <textarea v-model="form.comment" name="comment" placeholder="comment" type="text"
+                                class="comment-input"></textarea>
+                            <textarea v-model="form.username" name="username" placeholder="username" type="text"
+                                class="comment-username"> </textarea>
+                            <div>
+                                <button @click="addComment" class="submit-comment-button">SUBMIT COMMENT</button>
+                            </div>
+                            <div class=comments-output-container>
+                                <div class="comments-output" v-for="comment in comments">
+                                    <p>{{comment.username}} <i>wrote:</i><br /> {{comment.comment}} </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </script>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
+
 </html>
