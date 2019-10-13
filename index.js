@@ -102,4 +102,4 @@ app.get("/showComment/:id", (req, res) => {
 		});
 });
 
-app.listen(8080, () => console.log("Image board server is running..."));
+app.listen(process.env.PORT || 8080, () => console.log("Image board server is running..."));
